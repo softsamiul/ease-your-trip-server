@@ -18,9 +18,10 @@ async function run(){
   try{
       client.connect();
       const database = client.db("easeYourTrip");
-      const tripsCollection = database.collection("trips")
+      const tripsCollection = database.collection("trips");
+      const ordersCollection = database.collection('orders');
 
-      // GET API
+      // GET API 
       app.get('/trips', async(req, res)=>{
         const cursor = tripsCollection.find({});
         const trips = await cursor.toArray();
@@ -34,6 +35,20 @@ async function run(){
         const query = ({_id: ObjectId(id)});
         const trip = await tripsCollection.findOne(query);
         res.json(trip)
+      })
+
+      // GET API FOR  GETTING ORDERS
+      app.get('/orders', async(req, res)=>{
+        const cursor = ordersCollection.find({});
+        const orders = await cursor.toArray();
+        res.json(orders);
+      })
+
+      // POST API FOR INSERT ORDERS
+      app.post('/orders', async(req, res)=>{
+        const query = req.body;
+        const orders = await ordersCollection.insertOne(query);
+        res.json(orders);
       })
   }finally{
     // client.close()
