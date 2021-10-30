@@ -50,6 +50,16 @@ async function run(){
         const orders = await ordersCollection.insertOne(query);
         res.json(orders);
       })
+
+      // POST API FOR INSERT NEW PACKAGE
+      app.post('/trips', async(req, res)=>{
+        const query = req.body;
+        const trips = await tripsCollection.insertOne(query);
+        res.json(trips);
+      })
+
+      // UPDATE API FOR TRIPS
+      app.put('')
   }finally{
     // client.close()
   }
