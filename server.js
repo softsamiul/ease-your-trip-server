@@ -58,18 +58,28 @@ async function run(){
         res.json(trips);
       })
 
+
+      // DELETE ORDERS API
+      app.delete('/orders/:id', async(req, res)=>{
+        const id = req.params.id;
+        const query = ({_id: ObjectId(id)});
+        const rest = await ordersCollection.deleteOne(query);
+        res.json(rest);
+      })
+
       // UPDATE API FOR TRIPS
-      // app.put('/orders/:id', async(req, res)=>{
-      //   const id = req.params.id;
-      //   const query = ({_id: ObjectId(id)});
-      //   const updateDoc = {
-      //     $set: {
-      //       status: "Approved"
-      //     }
-      //   }
-      //   const result = await ordersCollection.updateOne(query, updateDoc);
-      //   res.json(result)
-      // })
+      app.put('/orders/:id', async(req, res)=>{
+        const id = req.params.id;
+        const query = ({_id: ObjectId(id)});
+        const updateDoc = {
+          $set: {
+            status: "Approved"
+          }
+        }
+        const result = await ordersCollection.updateOne(query, updateDoc);
+        res.json(result)
+      })
+
   }finally{
     // client.close()
   }
