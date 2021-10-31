@@ -59,7 +59,17 @@ async function run(){
       })
 
       // UPDATE API FOR TRIPS
-      app.put('')
+      // app.put('/orders/:id', async(req, res)=>{
+      //   const id = req.params.id;
+      //   const query = ({_id: ObjectId(id)});
+      //   const updateDoc = {
+      //     $set: {
+      //       status: "Approved"
+      //     }
+      //   }
+      //   const result = await ordersCollection.updateOne(query, updateDoc);
+      //   res.json(result)
+      // })
   }finally{
     // client.close()
   }
